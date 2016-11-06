@@ -9,17 +9,18 @@ chai.use(sinonChai);
 describe('Express server', () => {
     let stubExpress;
     let spyExpressGet;
-    let spyExpressListen;
+    let stubExpressListen;
     let spyHomepage;
     let spyLogin;
     let spyAuthenticate;
     let spyDashboard;
     let fakeExpress;
     let server;
+    const fakeHttpServer = {};
 
     beforeEach(() => {
         spyExpressGet = sinon.spy();
-        spyExpressListen = sinon.spy();
+        stubExpressListen = sinon.stub();
         spyHomepage = sinon.spy();
         spyLogin = sinon.spy();
         spyAuthenticate = sinon.spy();
@@ -28,11 +29,14 @@ describe('Express server', () => {
         // Create fake express application with spy methods
         fakeExpress = {
             get: spyExpressGet,
-            listen: spyExpressListen
+            listen: stubExpressListen
         };
 
         // Return fake express application when express() is called
         stubExpress = sinon.stub().returns(fakeExpress);
+
+        // app.listen returns a fake HttpServer
+        stubExpressListen.returns(fakeHttpServer);
 
         // Use proxyquire to stub required modules and return
         // our spies so we can check assertions
@@ -47,7 +51,7 @@ describe('Express server', () => {
 
     it('should return expected application', () => {
         const returnedServer = server.start();
-        expect(returnedServer).to.eql(fakeExpress);
+        expect(returnedServer).to.eql(fakeHttpServer);
     });
 
     it('should setup default route', () => {
@@ -71,12 +75,12 @@ describe('Express server', () => {
 
     it('should listen on default port 7080', () => {
         server.start();
-        spyExpressListen.should.have.been.calledWithExactly(7080, sinon.match.func)
+        stubExpressListen.should.have.been.calledWithExactly(7080, sinon.match.func)
     });
 
     it('should listen on expected port if passed', () => {
         const expectedPort = 8888;
         server.start(expectedPort);
-        spyExpressListen.should.have.been.calledWithExactly(expectedPort, sinon.match.func)
+        stubExpressListen.should.have.been.calledWithExactly(expectedPort, sinon.match.func)
     });
 });

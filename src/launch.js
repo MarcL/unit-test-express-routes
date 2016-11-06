@@ -19,11 +19,11 @@ function start(port = 7080) {
 
     setupRoutes(app);
 
-    app.listen(port, () => {
+    const server = app.listen(port, () => {
         console.log(`Server running on: ${port}`);
     });
 
-    return app;
+    return server;
 }
 
 export {
