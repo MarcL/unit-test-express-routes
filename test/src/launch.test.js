@@ -49,7 +49,7 @@ describe('Express server', () => {
         });
     });
 
-    it('should return expected application', () => {
+    it('should return expected http server', () => {
         const returnedServer = server.start();
         expect(returnedServer).to.eql(fakeHttpServer);
     });
