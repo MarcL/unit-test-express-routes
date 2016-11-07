@@ -23,4 +23,6 @@ The tests assert that the routes are set up with the expected middleware. In my 
 
 I'd expect there to be an additional layer of integration testing using [supertest](https://github.com/visionmedia/supertest) and [nock](https://github.com/node-nock/nock) which would better verify the full flow on each route too.
 
-I'll write up this in more detail in a blog post shortly.
+I've written a blog post about the reasoning behind why and how you would unit test Express routes here:
+
+[How To Unit Test Express Routes](http://localhost:4000/how-to-unit-test-express-routes/?utm_source=github&utm_campaign=unit-test-express-routes&utm_medium=repository) 
