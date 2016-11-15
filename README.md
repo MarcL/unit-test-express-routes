@@ -25,4 +25,4 @@ I'd expect there to be an additional layer of integration testing using [superte
 
 I've written a blog post about the reasoning behind why and how you would unit test Express routes here:
 
-[How To Unit Test Express Routes](http://localhost:4000/how-to-unit-test-express-routes/?utm_source=github&utm_campaign=unit-test-express-routes&utm_medium=repository) 
+[How To Unit Test Express Routes](http://www.marclittlemore.com/how-to-unit-test-express-routes/?utm_source=github&utm_campaign=unit-test-express-routes&utm_medium=repository) 
